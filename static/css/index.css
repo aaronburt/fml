@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f0f0f0;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.upload-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    padding: 2rem;
+    max-width: 400px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #555;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.btn-upload {
+    display: block;
+    width: 100%;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.btn-upload:hover {
+    background-color: #0056b3;
+}
+
+.response-message {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 4px;
+    display: none;
+    line-height: 1.5;
+}
+
+.response-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.response-error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background: #1a1a1a;
+    }
+
+    .upload-container {
+        background: #2d2d2d;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+        color: #e0e0e0;
+    }
+
+    label {
+        color: #cccccc;
+    }
+
+    input[type="file"] {
+        color: #e0e0e0;
+        background: #3d3d3d;
+    }
+
+    input[type="file"]::-webkit-file-upload-button {
+        background: #404040;
+        color: #e0e0e0;
+        border: 1px solid #505050;
+    }
+
+    .btn-upload {
+        background-color: #0066cc;
+    }
+
+    .btn-upload:hover {
+        background-color: #0052a3;
+    }
+
+    .response-success {
+        background-color: #1e3a2d;
+        color: #8fff9d;
+    }
+
+    .response-error {
+        background-color: #3a1e1e;
+        color: #ff8f8f;
+    }
+
+    a {
+        color: #66b3ff;
+    }
+
+    a:hover {
+        color: #99ccff;
+    }
+}
