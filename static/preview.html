@@ -13,13 +13,75 @@
 <body>
 <div class="preview-container">
     <h1>File Preview</h1>
-    <div class="media-preview" id="mediaPreview"></div>
+    <div class="media-preview" id="mediaPreview">Loading...</div>
     <div class="file-info">
         <div class="filename" id="filename">Loading...</div>
     </div>
     <a href="#" class="btn btn-download" id="downloadBtn" download>Download File</a>
     <a href="/" class="btn btn-back">Back to Upload</a>
 </div>
-<script src="/js/preview.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mediaPreview = document.getElementById('mediaPreview');
+        const filenameElem = document.getElementById('filename');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        if (!mediaPreview || !filenameElem || !downloadBtn) {
+            console.error('Essential DOM elements are missing.');
+            return;
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const fileId = urlParams.get('id');
+
+        if (!fileId) {
+            displayError('No file ID provided.');
+            return;
+        }
+
+        fetchFileData(fileId);
+
+        async function fetchFileData(id) {
+            try {
+                const response = await fetch(`/api/${id}`);
+                if (!response.ok) {
+                    throw new Error('File not found.');
+                }
+                const data = await response.json();
+                renderFile(data);
+            } catch (error) {
+                console.error('Error fetching file data:', error);
+                displayError('Error loading file.');
+            }
+        }
+
+        function renderFile(data) {
+            if (data.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = `/files/${data.filename}`;
+                img.alt = data.originalName;
+                mediaPreview.innerHTML = '';
+                mediaPreview.appendChild(img);
+            } else if (data.type.startsWith('video/')) {
+                const video = document.createElement('video');
+                video.src = `/files/${data.filename}`;
+                video.controls = true;
+                mediaPreview.innerHTML = '';
+                mediaPreview.appendChild(video);
+            } else {
+                mediaPreview.textContent = 'Preview not available for this file type.';
+            }
+
+            filenameElem.textContent = data.originalName;
+            downloadBtn.href = `/files/${data.filename}`;
+        }
+
+        function displayError(message) {
+            mediaPreview.textContent = message;
+            filenameElem.textContent = 'N/A';
+            downloadBtn.style.display = 'none';
+        }
+    });
+</script>
 </body>
 </html>

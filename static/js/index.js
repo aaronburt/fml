@@ -23,7 +23,7 @@ uploadForm.addEventListener("submit", async (event) => {
             responseMessage.className = "response-message response-success";
             responseMessage.innerHTML = `
             Success: ${data.message}<br/>
-            <a href="/preview/${data.file}?file=${data.original}" target="_blank" rel="noopener noreferrer">
+            <a href="/view?id=${data.id}" target="_blank" rel="noopener noreferrer">
               Click here to view your file
             </a>`;
             responseMessage.style.display = "block";
